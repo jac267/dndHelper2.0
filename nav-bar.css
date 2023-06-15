@@ -1,0 +1,5 @@
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid 3px #7289da;
+}
