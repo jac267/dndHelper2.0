@@ -4,6 +4,7 @@ function readURL(input) {
     var reader = new FileReader();
 
     reader.onload = function (e) {
+      mapCanvas = document.getElementById("map-canvas");
       mapCanvas.src = e.target.result;
     };
 

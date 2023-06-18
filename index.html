@@ -4,13 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.js"
+    ></script>
+    <link href="https://fonts.cdnfonts.com/css/gg-sans-2" rel="stylesheet" />
     <title>DnD helper</title>
 
     <script src="canvas.js" defer></script>
     <script src="mapSettings.js" defer></script>
+    <script src="token.js" defer></script>
+    <script src="addEnemy.js" defer></script>
+    <script src="gamelogic.js" defer></script>
 
+    <link rel="stylesheet" href="blueButton.css" />
     <link rel="stylesheet" href="canvas.css" />
     <link rel="stylesheet" href="nav-bar.css" />
+    <link rel="stylesheet" href="enemyUi.css" />
 
     <!-- fa fa font -->
     <link
@@ -19,15 +33,165 @@
     />
   </head>
   <body>
+    <div class="enemy-ui" id="enemy-ui">
+      <div class="enemy-ui-view">
+        <div class="top-bar">
+          <input
+            id="input-Monster"
+            class="addMonster"
+            type="file"
+            onchange="getImageToken(this);"
+          />
+          <h2>Nb of Time:</h2>
+          <input id="NbMonster" type="number" value="1" />
+
+          <button class="white-button" onclick="addEnemys()">add</button>
+          <button
+            class="blue-button"
+            onclick="document.getElementById('enemy-ui').style.display = 'none'"
+          >
+            x
+          </button>
+        </div>
+        <div id="hitPoint">
+          <h2>hit point:</h2>
+          <input id="hitPointMod" type="number" value="0" />
+        </div>
+
+        <div class="classModContainer">
+          <div class="classMod">
+            <div id="Str">
+              <h7>Strength:</h7>
+              <input id="StrMod" type="number" value="0" />
+            </div>
+            <div id="Dex">
+              <h7>Dexterity:</h7>
+              <input id="DexMod" type="number" value="0" />
+            </div>
+            <div id="Const">
+              <h7>Constitution:</h7>
+              <input id="ConstMod" type="number" value="0" />
+            </div>
+          </div>
+          <div class="classMod">
+            <div id="Int">
+              <h7>Intelligence:</h7>
+              <input id="IntMod" type="number" value="0" />
+            </div>
+            <div id="Wis">
+              <h7>Wisdom:</h7>
+              <input id="WisMod" type="number" value="0" />
+            </div>
+            <div id="Cha">
+              <h7>Charisma:</h7>
+              <input id="ChaMod" type="number" value="0" />
+            </div>
+            <div id="Ini">
+              <h7>Initiative:</h7>
+              <input id="InitMod" type="number" value="0" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="nav-bar">
-      <button class="delete-map" onclick="gkhead.src = ''; createImage();">
+      <button
+        class="delete-map white-button"
+        id="trash"
+        onclick="document.getElementById('map-canvas').src = '';"
+      >
         <i class="fa fa-trash" aria-hidden="true"></i>
       </button>
+
       <input id="input-map" type="file" onchange="readURL(this);" />
+      <button
+        class="white-button"
+        id="add"
+        onclick="document.getElementById('enemy-ui').style.display = 'block'"
+      >
+        add
+      </button>
+
+      <input
+        id="token-size"
+        type="number"
+        onchange="resizeToken();"
+        value="25"
+      />
+      <div class="dice">
+        <button id="reset-result" onclick="reset()">cc</button>
+        <button class="blue-button" id="d4" onclick="roll(4)">D4</button>
+        <button class="blue-button" id="d6" onclick="roll(6)">D6</button>
+        <button class="blue-button" id="d8" onclick="roll(8)">D8</button>
+        <button class="blue-button" id="d10" onclick="roll(10)">D10</button>
+        <button class="blue-button" id="d12" onclick="roll(12)">D12</button>
+        <button class="blue-button" id="d20" onclick="roll(20)">D20</button>
+        <p>=</p>
+        <p id="resulte">0</p>
+      </div>
+      <div class="saving-throw">
+        <div class="dropdown">
+          <button class="dropbtn" id="dropbtn">Saving Throw</button>
+          <div class="dropdown-content">
+            <p
+              href="#"
+              onclick="document.getElementById('dropbtn').textContent = 'Strength'"
+            >
+              Strength
+            </p>
+            <p
+              href="#"
+              onclick="document.getElementById('dropbtn').textContent = 'Dexterity'"
+            >
+              Dexterity
+            </p>
+            <p
+              href="#"
+              onclick="document.getElementById('dropbtn').textContent = 'Constitution'"
+            >
+              Constitution
+            </p>
+            <p
+              href="#"
+              onclick="document.getElementById('dropbtn').textContent = 'Intelligence'"
+            >
+              Intelligence
+            </p>
+            <p
+              href="#"
+              onclick="document.getElementById('dropbtn').textContent = 'Wisdom'"
+            >
+              Wisdom
+            </p>
+            <p
+              href="#"
+              onclick="document.getElementById('dropbtn').textContent = 'Charisma'"
+            >
+              Charisma
+            </p>
+          </div>
+        </div>
+        <p id="mob-selected">* 0</p>
+        <i class="fa fa-arrow-right" id="arrow" aria-hidden="true"></i>
+        <input
+          id="damage-on-failed"
+          class="damage-input"
+          type="number"
+          value="0"
+        />
+        <input
+          id="damage-on-succes"
+          class="damage-input"
+          type="number"
+          value="0"
+        />
+        <button class="blue-button" id="do-saving">GO!</button>
+      </div>
     </div>
 
-    <div id="map">
-      <img id="mapCanvas" src="" />
+    <div class="container">
+      <div id="map"></div>
+      <img id="map-canvas" src="" />
     </div>
   </body>
 </html>

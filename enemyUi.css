@@ -1,0 +1,124 @@
+.enemy-ui {
+  display: none;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+  background-color: #424549;
+  border: solid #7289da 2px;
+  z-index: 3;
+  border-radius: 25px;
+  font-family: "gg sans", sans-serif;
+  color: #1e2124;
+}
+.enemy-ui input {
+  font-family: "gg sans", sans-serif;
+  color: white;
+  font-size: 18px;
+  background-color: #1e2124;
+  border: none;
+  position: relative;
+
+  max-width: 80vw;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.5px;
+  background-color: #202225;
+  border: 1px solid #202225;
+  border-radius: 3px;
+  outline: none;
+}
+.addMonster {
+  width: 35%;
+}
+.enemy-ui-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  padding: 25px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: left;
+  gap: 2.5rem;
+  border-bottom: solid #282b30 5px;
+  background-color: #282b30;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.top-bar h2 {
+  position: relative;
+  width: 21%;
+  text-align: center;
+  align-items: center;
+  padding-top: 0.75%;
+  left: 3%;
+  color: white;
+}
+#NbMonster {
+  width: 10%;
+  padding-left: 1%;
+}
+
+#hitPoint {
+  height: 50px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  color: white;
+}
+
+.classMod {
+  text-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+.classMod div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  gap: 2.5rem;
+}
+
+.classMod h7 {
+  padding-left: 30px;
+  width: 100px;
+  font-size: 18px;
+  color: white;
+}
+
+.classModContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.token {
+  top: 20vh;
+  left: 50vw;
+  position: relative;
+  height: 25px;
+  width: 25px;
+  border-radius: 100px;
+  background-color: gray;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  border: rgba(1, 1, 1, 0) solid 5px;
+  z-index: 1000;
+
+  opacity: 0.7;
+}
+
+.text {
+  opacity: 1 !important;
+  color: #7289da !important;
+}

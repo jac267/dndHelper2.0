@@ -1,5 +1,135 @@
 .nav-bar {
+  position: relative;
   display: flex;
   flex-direction: row;
   border-bottom: solid 3px #7289da;
+  height: 50px;
+  width: 100%;
+  gap: 2.5rem;
+}
+
+.dice {
+  display: flex;
+  gap: 2.5rem;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-left: #23272a solid 4px;
+  border-right: #23272a solid 4px;
+  height: 100%;
+}
+.dice p {
+  color: #fff;
+  font-size: 40px;
+}
+.dice button {
+  color: white;
+  font-size: 30px;
+  width: 100%;
+}
+
+#add {
+  width: 5%;
+}
+
+#trash {
+  width: 5% !important;
+}
+
+#token-size {
+  width: 5%;
+  font-size: larger;
+}
+
+#resulte {
+}
+
+#reset-result {
+  color: #fff;
+  font-size: 20px;
+
+  cursor: pointer;
+  background-color: rgba(1, 1, 1, 0);
+  position: relative;
+  left: -0%;
+}
+
+.dropbtn {
+  background-color: #7289da;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  z-index: 10 !important;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  z-index: 10 !important;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  z-index: 10 !important;
+}
+
+.dropdown-content p {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  z-index: 10 !important;
+}
+
+.dropdown-content p:hover {
+  background-color: #f1f1f1;
+  z-index: 10 !important;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  z-index: 10 !important;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #7289da;
+  z-index: 10 !important;
+}
+
+.saving-throw {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+}
+
+.saving-throw > p {
+  color: #fff;
+  font-size: 40px;
+}
+
+.damage-input {
+  width: 7.5%;
+  font-size: 30px;
+}
+
+#damage-on-failed {
+  background-color: red;
+}
+#damage-on-succes {
+  background-color: green;
+}
+
+#arrow {
+  color: #fff;
+  font-size: 40px;
+}
+
+#do-saving {
+  width: 10%;
 }

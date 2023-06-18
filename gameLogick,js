@@ -1,0 +1,74 @@
+document.body.onkeyup = function (e) {
+  nextSlidePlease(e);
+  log = document.getElementById("rollLog");
+  var roll = document.createElement("li");
+  //d4
+  if (e.keyCode == 49) {
+    nb = getRandomInt(4);
+    totalroll += nb;
+    roll.textContent = "+ " + nb + "/4";
+    log.appendChild(roll);
+  }
+  //d6
+  if (e.keyCode == 50) {
+    nb = getRandomInt(6);
+    totalroll += nb;
+    roll.textContent = "+ " + nb + "/6";
+    log.appendChild(roll);
+  }
+  //d8
+  if (e.keyCode == 51) {
+    nb = getRandomInt(8);
+    totalroll += nb;
+    roll.textContent = "+ " + nb + "/8";
+    log.appendChild(roll);
+  }
+  //d10
+  if (e.keyCode == 52) {
+    nb = getRandomInt(10);
+    totalroll += nb;
+    roll.textContent = "+ " + nb + "/10";
+    log.appendChild(roll);
+  }
+  //d12
+  if (e.keyCode == 53) {
+    nb = getRandomInt(12);
+    totalroll += nb;
+    roll.textContent = "+ " + nb + "/12";
+    log.appendChild(roll);
+  }
+  //d20
+  if (e.keyCode == 54) {
+    nb = getRandomInt(20);
+    totalroll += nb;
+    roll.textContent = "+ " + nb + "/20";
+    log.appendChild(roll);
+  }
+  //d100
+  if (e.keyCode == 55) {
+    nb = getRandomInt(100);
+    totalroll += nb;
+    roll.textContent = "+ " + nb + "/100";
+    log.appendChild(roll);
+  }
+  //reset
+  if (e.keyCode == 40) {
+    totalroll = 0;
+    log.innerHTML = "";
+  }
+
+  //past
+  if (e.keyCode == 38) {
+    if (focused_item_id != "") {
+      document.getElementById(focused_item_id).value = totalroll;
+    }
+  }
+
+  //remove
+  if (e.keyCode == 37) {
+    document.getElementById(focused_item_id).value =
+      document.getElementById(focused_item_id).value -
+      parseInt(prompt("DEGATS"));
+  }
+  document.getElementById("result").textContent = totalroll;
+};
