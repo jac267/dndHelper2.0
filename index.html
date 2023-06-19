@@ -21,6 +21,7 @@
     <script src="addEnemy.js" defer></script>
     <script src="gamelogic.js" defer></script>
 
+    <link rel="stylesheet" href="token.css" />
     <link rel="stylesheet" href="blueButton.css" />
     <link rel="stylesheet" href="canvas.css" />
     <link rel="stylesheet" href="nav-bar.css" />
@@ -33,6 +34,7 @@
     />
   </head>
   <body>
+    <script id="savedMapping" src="mapping"></script>
     <div class="enemy-ui" id="enemy-ui">
       <div class="enemy-ui-view">
         <div class="top-bar">
@@ -72,6 +74,10 @@
               <h7>Constitution:</h7>
               <input id="ConstMod" type="number" value="0" />
             </div>
+            <div id="PreIni">
+              <h7>customInit:</h7>
+              <input id="PreIniMod" type="checkbox" />
+            </div>
           </div>
           <div class="classMod">
             <div id="Int">
@@ -94,41 +100,62 @@
         </div>
       </div>
     </div>
+
+    <div class="container">
+      <div id="map"></div>
+      <img id="map-canvas" src="" />
+    </div>
     <div class="nav-bar">
-      <button
-        class="delete-map white-button"
-        id="trash"
-        onclick="document.getElementById('map-canvas').src = '';"
-      >
-        <i class="fa fa-trash" aria-hidden="true"></i>
-      </button>
+      <div class="first-tool">
+        <input
+          id="input-map"
+          type="file"
+          class="white-button"
+          onchange="readURL(this);"
+        />
+        <button
+          class="delete-map white-button"
+          id="trash"
+          onclick="document.getElementById('map-canvas').src = '';"
+        >
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
 
-      <input id="input-map" type="file" onchange="readURL(this);" />
-      <button
-        class="white-button"
-        id="add"
-        onclick="document.getElementById('enemy-ui').style.display = 'block'"
-      >
-        add
-      </button>
+        <button
+          class="white-button"
+          id="add"
+          onclick="document.getElementById('enemy-ui').style.display = 'block'"
+        >
+          add
+        </button>
 
-      <input
-        id="token-size"
-        type="number"
-        onchange="resizeToken();"
-        value="25"
-      />
-      <div class="dice">
-        <button id="reset-result" onclick="reset()">cc</button>
-        <button class="blue-button" id="d4" onclick="roll(4)">D4</button>
-        <button class="blue-button" id="d6" onclick="roll(6)">D6</button>
-        <button class="blue-button" id="d8" onclick="roll(8)">D8</button>
-        <button class="blue-button" id="d10" onclick="roll(10)">D10</button>
-        <button class="blue-button" id="d12" onclick="roll(12)">D12</button>
-        <button class="blue-button" id="d20" onclick="roll(20)">D20</button>
-        <p>=</p>
-        <p id="resulte">0</p>
+        <input
+          id="token-size"
+          type="number"
+          onchange="resizeToken();"
+          value="25"
+        />
       </div>
+
+      <div class="dice">
+        <div class="row">
+          <button class="blue-button" id="d4" onclick="roll(4)">D4</button>
+          <button class="blue-button" id="d6" onclick="roll(6)">D6</button>
+          <button class="blue-button" id="d8" onclick="roll(8)">D8</button>
+        </div>
+        <div class="row">
+          <button class="blue-button" id="d10" onclick="roll(10)">D10</button>
+          <button class="blue-button" id="d12" onclick="roll(12)">D12</button>
+          <button class="blue-button" id="d20" onclick="roll(20)">D20</button>
+        </div>
+
+        <p>=</p>
+        <div class="row">
+          <p id="resulte">0</p>
+          <button id="reset-result" onclick="reset()">cc</button>
+        </div>
+      </div>
+
       <div class="saving-throw">
         <div class="dropdown">
           <button class="dropbtn" id="dropbtn">Saving Throw</button>
@@ -185,13 +212,18 @@
           type="number"
           value="0"
         />
-        <button class="blue-button" id="do-saving">GO!</button>
+        <button class="blue-button" id="do-saving" onclick="DosaveThrow()">
+          GO!
+        </button>
       </div>
-    </div>
-
-    <div class="container">
-      <div id="map"></div>
-      <img id="map-canvas" src="" />
+      <div class="adminbox">
+        <p class="adminText">Admin</p>
+        <input type="checkbox" id="admin" />
+      </div>
+      <div class="adminbox">
+        <p class="adminText">initiative:</p>
+        <p id="initiativeTrackerTEXTE">20</p>
+      </div>
     </div>
   </body>
 </html>

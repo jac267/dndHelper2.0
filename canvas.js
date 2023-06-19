@@ -2,6 +2,11 @@ const container = document.querySelector(".container");
 const img = document.querySelector("img");
 const map = document.getElementById("map");
 
+img.style.left = "0px";
+img.style.top = "0px";
+map.style.left = "0px";
+map.style.top = "0px";
+
 let zoom = 1;
 container.addEventListener("wheel", (e) => {
   img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
@@ -46,7 +51,6 @@ container.addEventListener("mousemove", (e) => {
   x = e.offsetX;
   y = e.offsetY;
 
-  console.log(x, y);
   img.style.left = `${x - xAxis}px`;
   img.style.top = `${y - yAxis}px`;
   map.style.left = `${x - xAxis}px`;
