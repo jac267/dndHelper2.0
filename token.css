@@ -15,6 +15,7 @@
   font-size: 25px;
   border: rgba(1, 1, 1, 0) solid 5px;
   z-index: 1000;
+  color: rgba(1, 1, 1, 0);
 
   opacity: 0.7;
 }

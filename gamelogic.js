@@ -239,3 +239,17 @@ function createToken2(x, y, picture, height) {
 
   return token;
 }
+
+function hideOrShowHp() {
+  if (document.getElementById("show-hp-bar").checked) {
+    alert(2);
+    for (const e of document.getElementsByClassName("token")) {
+      e.style.color = "rgb(0,0,0)";
+    }
+  } else {
+    alert(1);
+    for (const e of document.getElementsByClassName("token")) {
+      e.style.color = "rgba(0,0,0,0)";
+    }
+  }
+}
