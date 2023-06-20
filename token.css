@@ -21,6 +21,8 @@
 }
 .Selectionned {
   border: black solid 5px;
+  height: 25px;
+  width: 25px;
 }
 
 .currentTurn {

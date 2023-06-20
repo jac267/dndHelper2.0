@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@ionic-native/vibration": "^5.36.0",
     "body-parser": "^1.20.2",
     "browserify-fs": "^1.0.0",
     "ejs": "^3.1.9",

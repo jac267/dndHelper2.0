@@ -88,6 +88,14 @@ function updateSelection() {
   }
   document.getElementById("mob-selected").textContent =
     "* " + document.getElementsByClassName("Selectionned").length;
+
+  if (document.getElementsByClassName("Selectionned").length == 1) {
+    document.getElementById("token-size").value = String(
+      document.getElementsByClassName("Selectionned")[0].style.height
+    ).replace("px", "");
+  } else {
+    document.getElementById("token-size").value = "";
+  }
 }
 
 function DosaveThrow() {
@@ -109,8 +117,7 @@ function DosaveThrow() {
 
     if (Number.isInteger(difficulter)) {
       for (const e of document.getElementsByClassName("Selectionned")) {
-        roll = getRandomInt(20) + parseInt(e.value[slag]);
-        if (roll >= difficulter) {
+        if (getRandomInt(20) + e.value[slag] >= difficulter) {
           damage(e.id, onSuccesDamage);
         } else {
           damage(e.id, onFailledDamage);
@@ -171,7 +178,7 @@ function clearCurrentTurn() {
   }
 }
 
-setInterval(save, 1000);
+setInterval(save, 100);
 
 function save() {
   if (document.getElementById("admin").checked) {
@@ -190,15 +197,13 @@ function save() {
       var rect = e.getBoundingClientRect();
       var bodyRect = document.body.getBoundingClientRect(),
         elemRect = e.getBoundingClientRect(),
-        offset = elemRect.top - bodyRect.top;
-      console.log(offset);
-      outputs = {
-        x: rect.left,
-        y: rect.top,
-        stats: e.stats,
-        picture: e.style.backgroundImage,
-        size: e.style.height,
-      };
+        outputs = {
+          x: rect.left,
+          y: rect.top,
+          stats: e.stats,
+          picture: e.style.backgroundImage,
+          size: e.style.height,
+        };
       ls_token.push(JSON.parse(JSON.stringify(outputs)));
     }
     save_ = { map: document.getElementById("map-canvas").src, ls_token };
@@ -249,5 +254,17 @@ function hideOrShowHp() {
     for (const e of document.getElementsByClassName("token")) {
       e.style.color = "rgba(0,0,0,0)";
     }
+  }
+}
+
+function beOrUnbeAdmin() {
+  for (const e of document.getElementsByClassName("token")) {
+    e.remove();
+  }
+  for (const e of document.getElementsByClassName("token")) {
+    e.remove();
+  }
+  for (const e of document.getElementsByClassName("token")) {
+    e.remove();
   }
 }

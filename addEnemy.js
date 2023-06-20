@@ -52,6 +52,8 @@ function createToken(stats) {
   token.id = enemyId + "Token";
   enemyId += 1;
   token.className = "token";
+  token.style.height = 25 + "px";
+  token.style.width = 25 + "px";
   token.onmouseover = () => overed(token);
   token.onmouseout = () => overed(null);
   token.value = JSON.parse(JSON.stringify(stats));
@@ -62,11 +64,23 @@ function createToken(stats) {
 
 function resizeToken() {
   x = parseInt(document.getElementById("token-size").value);
-  for (const e of document.getElementsByClassName("token")) {
+  if (x == -1 || x == 1) {
+    for (const e of document.getElementsByClassName("Selectionned")) {
+      e.style.width =
+        parseInt(String(e.style.width).replace("px", "")) + x + "px";
+      e.style.height =
+        parseInt(String(e.style.width).replace("px", "")) + x + "px";
+      e.style.fontSize =
+        parseInt(String(e.style.width).replace("px", "")) + x + "px";
+    }
+    document.getElementById("token-size").value = "";
+  } else {
+    e = document.getElementsByClassName("Selectionned")[0];
     e.style.width = x + "px";
     e.style.height = x + "px";
     e.style.fontSize = x + "px";
   }
+
   return token;
 }
 
