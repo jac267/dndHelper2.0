@@ -28,6 +28,7 @@ function addEnemys() {
     wis: parseInt(document.getElementById("WisMod").value),
     cha: parseInt(document.getElementById("ChaMod").value),
     Init: parseInt(document.getElementById("InitMod").value),
+    alive: true,
   };
   for (
     let e = 0;
@@ -41,11 +42,11 @@ function addEnemys() {
         parseInt(document.getElementById("InitMod").value) + getRandomInt(20);
     }
     document.getElementById("map").appendChild(createToken(stats));
-    $("#" + (enemyId - 1) + "Token").draggable();
     document.getElementById(enemyId - 1 + "Token").style.backgroundImage =
       "url(" + image + ")";
   }
 }
+document.onmouseup = () => stopMoving();
 
 function createToken(stats) {
   var token = document.createElement("div");
@@ -56,6 +57,9 @@ function createToken(stats) {
   token.style.width = 25 + "px";
   token.onmouseover = () => overed(token);
   token.onmouseout = () => overed(null);
+  token.draggable = true;
+  token.onmousedown = () => moveTokenWithMouse(token.id);
+
   token.value = JSON.parse(JSON.stringify(stats));
   token.textContent = stats.hitPoint;
 
@@ -75,10 +79,11 @@ function resizeToken() {
     }
     document.getElementById("token-size").value = "";
   } else {
-    e = document.getElementsByClassName("Selectionned")[0];
-    e.style.width = x + "px";
-    e.style.height = x + "px";
-    e.style.fontSize = x + "px";
+    for (const e of document.getElementsByClassName("Selectionned")) {
+      e.style.width = x + "px";
+      e.style.height = x + "px";
+      e.style.fontSize = x + "px";
+    }
   }
 
   return token;

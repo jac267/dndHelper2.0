@@ -85,13 +85,13 @@
     font-size: 16px;
     border: none;
     cursor: pointer;
-    z-index: 10 !important;
+    z-index: 1 !important;
   }
 
   .dropdown {
     position: relative;
     display: inline-block;
-    z-index: 10 !important;
+    z-index: 1 !important;
   }
 
   .dropdown-content {
@@ -101,7 +101,6 @@
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    z-index: 10 !important;
   }
 
   .dropdown-content p {

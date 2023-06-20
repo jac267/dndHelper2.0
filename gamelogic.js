@@ -53,6 +53,7 @@ function isDead(id) {
     document.getElementById(id).onclick = "";
     document.getElementById(id).value.Init = 0;
     document.getElementById(id).style.zIndex = -1000;
+    document.getElementById(id).value.alive = false;
   }
 }
 
@@ -178,7 +179,7 @@ function clearCurrentTurn() {
   }
 }
 
-setInterval(save, 100);
+setInterval(save, 500);
 
 function save() {
   if (document.getElementById("admin").checked) {
@@ -193,17 +194,19 @@ function save() {
     // ...
 
     ls_token = [];
+
+    map_rect = document.getElementById("map").getBoundingClientRect();
     for (const e of document.getElementsByClassName("token")) {
       var rect = e.getBoundingClientRect();
-      var bodyRect = document.body.getBoundingClientRect(),
-        elemRect = e.getBoundingClientRect(),
-        outputs = {
-          x: rect.left,
-          y: rect.top,
-          stats: e.stats,
-          picture: e.style.backgroundImage,
-          size: e.style.height,
-        };
+
+      outputs = {
+        x: (rect.left - map_rect.left) * (900 / map_rect.width),
+        y: (rect.top - map_rect.top) * (900 / map_rect.height),
+        stats: e.stats,
+        picture: e.style.backgroundImage,
+        size: e.style.height,
+        stats: e.value,
+      };
       ls_token.push(JSON.parse(JSON.stringify(outputs)));
     }
     save_ = { map: document.getElementById("map-canvas").src, ls_token };
@@ -226,9 +229,12 @@ function smallReload() {
 
   document.getElementById("map").innerHTML = "";
   for (const e of mappingDict.ls_token) {
-    document
-      .getElementById("map")
-      .appendChild(createToken2(e.x, e.y, e.picture, e.size));
+    console.log(e.stats);
+    if (e.stats.alive) {
+      document
+        .getElementById("map")
+        .appendChild(createToken2(e.x, e.y, e.picture, e.size));
+    }
   }
 }
 
