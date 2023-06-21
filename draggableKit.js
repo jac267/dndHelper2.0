@@ -35,9 +35,9 @@ function move() {
     frect1 = first.getBoundingClientRect();
 
     first.style.left =
-      (origine.x - map_rect.left) * (900 / map_rect.width) + a.x + "px";
+      (origine.x - map_rect.left + a.x) * (900 / map_rect.width) + "px";
     first.style.top =
-      (origine.y - map_rect.top) * (900 / map_rect.height) + a.y + "px";
+      (origine.y - map_rect.top + a.y) * (900 / map_rect.height) + "px";
 
     frect2 = first.getBoundingClientRect();
     a2.x = frect2.left - frect1.left;
@@ -46,8 +46,10 @@ function move() {
       if (e.id != inititialeCallId) {
         var rect = e.getBoundingClientRect();
 
-        e.style.left = rect.left + a2.x + "px";
-        e.style.top = rect.top + a2.y + "px";
+        e.style.left =
+          (rect.left - map_rect.left + a2.x) * (900 / map_rect.width) + "px";
+        e.style.top =
+          (rect.top - map_rect.top + a2.y) * (900 / map_rect.height) + "px";
       }
     }
   }

@@ -57,7 +57,7 @@ function isDead(id) {
   }
 }
 
-document.getElementById("map").addEventListener("click", updateSelection);
+document.getElementById("map").addEventListener("mousedown", updateSelection);
 
 function updateSelection() {
   if (over == null) {
@@ -216,6 +216,7 @@ function save() {
   }
 }
 
+aaa = 1;
 function smallReload() {
   document.getElementById("savedMapping").remove();
   var script = document.createElement("script");
@@ -235,6 +236,10 @@ function smallReload() {
         .getElementById("map")
         .appendChild(createToken2(e.x, e.y, e.picture, e.size));
     }
+  }
+  if (aaa == 1) {
+    generateCaracterList(mappingDict.ls_token);
+    aaa = 2;
   }
 }
 

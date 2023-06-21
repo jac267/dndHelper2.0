@@ -9,21 +9,30 @@ map.style.top = "0px";
 
 let zoom = 1;
 container.addEventListener("wheel", (e) => {
-  img.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
-  map.style.transformOrigin = `${e.offsetX}px ${e.offsetY}px`;
+  if (!mouseHeld) {
+    start = { x: 0, y: 0 };
 
-  zoom += e.deltaY * -0.01;
-  zoom = Math.min(Math.max(1, zoom), 5);
+    var e = window.event;
 
-  if (zoom == 1) {
-    img.style.left = "0px";
-    img.style.top = "0px";
-    map.style.left = "0px";
-    map.style.top = "0px";
+    start.x = e.clientX;
+    start.y = e.clientY;
+
+    img.style.transformOrigin = `${start.x}px ${start.y}px`;
+    map.style.transformOrigin = `${start.x}px ${start.y}px`;
+
+    zoom += e.deltaY * -0.01;
+    zoom = Math.min(Math.max(1, zoom), 5);
+
+    if (zoom == 1) {
+      img.style.left = "0px";
+      img.style.top = "0px";
+      map.style.left = "0px";
+      map.style.top = "0px";
+    }
+
+    img.style.transform = `scale(${zoom})`;
+    map.style.transform = `scale(${zoom})`;
   }
-
-  img.style.transform = `scale(${zoom})`;
-  map.style.transform = `scale(${zoom})`;
 });
 
 let clicked = false;
