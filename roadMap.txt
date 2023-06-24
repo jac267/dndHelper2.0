@@ -10,8 +10,8 @@ bug a regler:
 
 features:
 **** 1. faire en sorte que ses moin scoff de selectionner le mode admin genre on devrais pas etre oubliger de speeder pour le faire
-****2. faire en sort que les joeurs peuvent selectionner leurs "token" et que il recoivent un message quand c'est leurs tour.
-3. que les joeurs puisse bouger leurs bonhomme
+**** 2. faire en sort que les joeurs peuvent selectionner leurs "token" et que il recoivent un message quand c'est leurs tour.
+**** 3. que les joeurs puisse bouger leurs bonhomme
 4. faire que on peut importer directement des template pour des enemy
 5. faire que le dm peut prendre des note pour chaque bonhomme 
 6. rendre les token meilleures si possible

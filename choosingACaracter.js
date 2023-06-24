@@ -15,6 +15,7 @@ function aCaracter(token) {
   output_li.className = "caracter";
 
   output_li.onclick = () => confirmeCaracter(token.id, token.stats.Init);
+  output_li.ontouchend = () => confirmeCaracter(token.id, token.stats.Init);
   output_img.style.backgroundImage = token.picture;
   output_p.textContent = token.stats.Init;
   output_p2.textContent = token.id;
