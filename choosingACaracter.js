@@ -2,7 +2,9 @@ caracter = { id: "", init: "" };
 function generateCaracterList(ls_token) {
   document.getElementById("ls-caracter").innerHTML = "";
   for (const e of ls_token) {
-    document.getElementById("ls-caracter").appendChild(aCaracter(e));
+    if (e.stats.alive) {
+      document.getElementById("ls-caracter").appendChild(aCaracter(e));
+    }
   }
 }
 
@@ -16,7 +18,7 @@ function aCaracter(token) {
 
   output_li.onclick = () => confirmeCaracter(token.id, token.stats.Init);
   output_li.ontouchend = () => confirmeCaracter(token.id, token.stats.Init);
-  output_img.style.backgroundImage = token.picture;
+  output_img.style.backgroundImage = "url(" + tokenImg[token.id] + ")";
   output_p.textContent = token.stats.Init;
   output_p2.textContent = token.id;
   output_li.appendChild(output_img);

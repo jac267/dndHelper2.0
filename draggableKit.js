@@ -2,6 +2,7 @@ mouseHeld = false;
 start = { x: 0, y: 0 };
 origine = { x: 0, y: 0 };
 inititialeCallId = "";
+
 function moveTokenWithMouse(id) {
   first = document.getElementById(id);
   var rect = first.getBoundingClientRect();

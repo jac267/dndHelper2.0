@@ -23,6 +23,7 @@
     <script src="draggableKit.js" defer></script>
     <script src="choosingACaracter.js" defer></script>
     <script src="prebuildfight.js" defer></script>
+    <script src="serverComunication.js" defer></script>
 
     <link rel="stylesheet" href="token.css" />
     <link rel="stylesheet" href="blueButton.css" />
@@ -39,7 +40,9 @@
     />
   </head>
   <body>
-    <script id="savedMapping" src="mapping"></script>
+    <script id="UpdatedLogs" src="UpdatedLogs"></script>
+    <script id="visualComponent" src="visualComponent"></script>
+
     <script id="mouvementUpdate" src="mouvementUpdate"></script>
     <div class="joystick-base" touch-action="none">
       <div class="joystick-shaft" touch-action="none"></div>
@@ -51,7 +54,7 @@
             id="input-Monster"
             class="addMonster"
             type="file"
-            onchange="getImageToken(this);"
+            accept="image/*"
           />
           <h2>Nb of Time:</h2>
           <input id="NbMonster" type="number" value="1" />

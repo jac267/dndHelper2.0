@@ -5,13 +5,70 @@ function getRandomInt(max) {
 
 image = "";
 
+const MAX_WIDTH = 100;
+const MAX_HEIGHT = 100;
+
+const INPUT = document.getElementById("input-Monster");
+
+INPUT.onchange = function (event) {
+  const file = event.target.files[0]; // get the file
+  const blobURL = URL.createObjectURL(file);
+
+  const img = new Image();
+  img.src = blobURL;
+
+  img.onload = function () {
+    var fileReader = new FileReader();
+    fileReader.onload = function (event) {
+      image = event.target.result;
+    };
+
+    const [newWidth, newHeight] = calculateSize(img, MAX_WIDTH, MAX_HEIGHT);
+    const canvas2 = document.createElement("canvas");
+    canvas2.width = newWidth;
+    canvas2.height = newHeight;
+    const ctx = canvas2.getContext("2d");
+    ctx.drawImage(img, 0, 0, newWidth, newHeight);
+    canvas2.toBlob((blob) => {
+      fileReader.readAsArrayBuffer(blob);
+    });
+  };
+};
+
+function calculateSize(img, maxWidth, maxHeight) {
+  let width = img.width;
+  let height = img.height;
+
+  // calculate the width and height, constraining the proportions
+  if (width > height) {
+    if (width > maxWidth) {
+      height = Math.round((height * maxWidth) / width);
+      width = maxWidth;
+    }
+  } else {
+    if (height > maxHeight) {
+      width = Math.round((width * maxHeight) / height);
+      height = maxHeight;
+    }
+  }
+  return [width, height];
+}
+
+function readableBytes(bytes) {
+  const i = Math.floor(Math.log(bytes) / Math.log(1024)),
+    sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
+
+  return (bytes / Math.pow(1024, i)).toFixed(2) + " " + sizes[i];
+}
+
 //Tous ce qui est par rapport aux bouton pour interagire avec la map a gauche
 function getImageToken(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();
 
     reader.onload = function (e) {
-      image = e.target.result;
+      const file = e.target.file;
+      const blobURL = window.URL.createObjectURL(file);
     };
 
     reader.readAsDataURL(input.files[0]);
@@ -43,7 +100,14 @@ function addEnemys() {
     }
     document.getElementById("map").appendChild(createToken(stats));
     document.getElementById(enemyId - 1 + "Token").style.backgroundImage =
-      "url(" + image + ")";
+      "url(" + URL.createObjectURL(new Blob([image])) + ")";
+
+    TheNewToken = {
+      key: enemyId - 1 + "Token",
+      value: JSON.parse(JSON.stringify(new Uint8Array(image))),
+    };
+
+    post("http://10.0.0.42:8080/tokenImg", TheNewToken);
   }
 }
 document.onmouseup = () => stopMoving();

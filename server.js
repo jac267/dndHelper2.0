@@ -5,14 +5,48 @@ app.use(express.json({ limit: "50mb" }));
 
 mapping = {};
 mouvement = [];
+
+tokenImg = {};
+mapImg = "";
+lastImgChange = 0;
+
 app.use(express.static(__dirname));
-app.get("/mapping", function (req, res) {
-  res.send("mappingDict = " + JSON.stringify(mapping));
+app.get("/UpdatedLogs", function (req, res) {
+  mapping["lastImgChange"] = lastImgChange;
+  res.send("UpdatedLogsDict = " + JSON.stringify(mapping));
 });
-app.post("/", function (request, response) {
+
+app.get("/mouvementUpdate", function (req, res) {
+  res.send("ls_mouvement = " + JSON.stringify(mouvement));
+});
+
+app.get("/visualComponent", function (req, res) {
+  res.send(
+    "visualComponent = " +
+      JSON.stringify({ mapIMG: mapImg, TokensIMG: tokenImg })
+  );
+});
+
+app.post("/tokenImg", function (request, response) {
+  key = request.body.key;
+  value = request.body.value;
+  tokenImg[key] = value;
+
+  lastImgChange = Date.now();
+  response.send(request.body); // echo the result back
+});
+
+app.post("/mapImg", function (request, response) {
+  mapImg = request.body.value;
+
+  lastImgChange = Date.now();
+  response.send(request.body); // echo the result back
+});
+
+app.post("/update", function (request, response) {
   mapping = request.body;
 
-  response.send({ message: "No bitches Found" }); // echo the result back
+  response.send(request.body); // echo the result back
 });
 app.get("/mouvementUpdate", function (req, res) {
   res.send("ls_mouvement = " + JSON.stringify(mouvement));

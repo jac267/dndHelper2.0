@@ -8,11 +8,34 @@ bug a regler:
 **** 6. reduire le temps de rafraichissement
 **** 7. faire que on voit pus le mot saving throw dans le menu pour ajouter
 
+
+8. regler le bug que les enemy morts apparaisse encore dans l'ecran de selection des personages
+
+9.faire que une fois que admin est cocher on peut pus l'enlever sinon sa vas touchier
+10. ne pas oublier de rendre les joeurs invincible
+11. mettre un bouton pour me permetre de sauvegarder a chaque tour quand on vas aus prochain initiative sa download
+
+
+
 features:
 **** 1. faire en sorte que ses moin scoff de selectionner le mode admin genre on devrais pas etre oubliger de speeder pour le faire
 **** 2. faire en sort que les joeurs peuvent selectionner leurs "token" et que il recoivent un message quand c'est leurs tour.
 **** 3. que les joeurs puisse bouger leurs bonhomme
-4. faire que on peut importer directement des template pour des enemy
+**** 4. faire que on peut importer directement des template pour des enemy
 5. faire que le dm peut prendre des note pour chaque bonhomme 
 6. rendre les token meilleures si possible
 
+
+
+pour l'instant les image seront separer du reste
+
+quand un client se connect pour la premiere fois il vas demander aux serveur les photos that is instant
+
+sauf lorsque il y a du changement dans le dict des small update il vas toujours avoir la date de derniere modification pis si la date ne corespond pas
+avec celle que le client a noter il vas reimporter les images
+
+{
+    lastImgChange":1687719374412
+    "currentTurn":"20",
+    "ls_token": [],
+}
