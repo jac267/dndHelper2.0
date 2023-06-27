@@ -130,6 +130,7 @@ function DosaveThrow() {
 
 function nextSlidePlease(e) {
   if (e.keyCode == 39) {
+    saveFight();
     tracker = document.getElementById("initiativeTrackerTEXTE");
 
     tour = tracker.textContent;
@@ -197,6 +198,7 @@ function beOrUnbeAdmin() {
   for (const e of document.getElementsByClassName("token")) {
     e.remove();
   }
+  document.getElementById("admin").disabled = true;
 }
 
 mylatesttap = 0;

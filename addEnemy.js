@@ -149,8 +149,6 @@ function resizeToken() {
       e.style.fontSize = x + "px";
     }
   }
-
-  return token;
 }
 
 over = null;

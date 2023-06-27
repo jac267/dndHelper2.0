@@ -1,4 +1,6 @@
 function saveFight() {
+  askTheServerWhatsNew("visualComponent", "visualComponent");
+
   output = { ls_token: [] };
 
   for (const e of document.getElementsByClassName("token")) {
@@ -8,18 +10,16 @@ function saveFight() {
     t_token = {
       x: (rect.left - map_rect.left) * (900 / map_rect.width),
       y: (rect.top - map_rect.top) * (900 / map_rect.height),
-      picture: e.style.backgroundImage,
+      picture: visualComponent.TokensIMG[e.id],
       size: e.style.height,
       stats: e.value,
       id: e.id,
     };
 
     output.ls_token.push(JSON.parse(JSON.stringify(t_token)));
-    enemyId += 1;
   }
-  enemyId += 1;
 
-  downloadObjectAsJson(output, "saveFight");
+  downloadObjectAsJson(output, currentTurn + "turn");
 }
 
 function downloadObjectAsJson(exportObj, exportName) {
@@ -37,6 +37,8 @@ function downloadObjectAsJson(exportObj, exportName) {
 function uploadFight(json) {
   for (const e of json.ls_token) {
     document.getElementById("map").appendChild(createToken3(e));
+
+    enemyId += 1;
   }
 }
 
@@ -57,8 +59,19 @@ function createToken3(info) {
 
   token.style.left = info.x + "px";
   token.style.top = info.y + "px";
+  bg = URL.createObjectURL(
+    new Blob(
+      [new Uint8Array(Object.values(info.picture))],
+      { type: "image/png" } /* (1) */
+    )
+  );
 
-  token.style.backgroundImage = info.picture;
+  token.style.backgroundImage = "url(" + bg + ")";
+  TheNewToken = {
+    key: token.id,
+    value: info.picture,
+  };
 
+  post("http://10.0.0.42:8080/tokenImg", TheNewToken);
   return token;
 }
